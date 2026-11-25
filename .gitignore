@@ -1,0 +1,9 @@
+.venv-e5/
+__pycache__/
+*.py[cod]
+.local-data/
+.local-models/
+.local-runtime/
+учебники/*.pdf
+*.bak
+учебники/K_Zommer_Akkumulyator_Znany_Po_Khimii.pdf

@@ -1,0 +1,1715 @@
+@prefix : <http://example.org/chemistry#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://example.org/chemistry#> .
+
+<http://example.org/chemistry> rdf:type owl:Ontology ;
+                                dc:source "учебники/K_Zommer_Akkumulyator_Znany_Po_Khimii.pdf" ;
+                                dc:title "Химическая онтология по книге К. Зоммера (перевод П.Б. Терентьева, ред. В.М. Потапова)" ;
+                                rdfs:comment "2-е издание, Volk und Wissen Volkseigener Verlag Berlin, 1975; перевод с немецкого, под ред. проф. В.М. Потапова." ;
+                                skos:note "Страницы указаны по печатной пагинации книги. Постраничные ссылки добавлены к ряду понятий; отдельные аксиомы, свойства и экземпляры требуют дополнительной атрибуции." .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/source
+dc:source rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/chemistry#belongsToGroup
+:belongsToGroup rdf:type owl:ObjectProperty ;
+                rdfs:domain :ChemicalElement ;
+                rdfs:range :Group ;
+                rdfs:label "принадлежит группе"@ru .
+
+
+###  http://example.org/chemistry#belongsToMainSubgroup
+:belongsToMainSubgroup rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :belongsToGroup ;
+                       rdfs:domain :ChemicalElement ;
+                       rdfs:range :MainSubgroup ;
+                       rdfs:label "принадлежит главной подгруппе"@ru .
+
+
+###  http://example.org/chemistry#belongsToSideSubgroup
+:belongsToSideSubgroup rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :belongsToGroup ;
+                       rdfs:domain :ChemicalElement ;
+                       rdfs:range :SideSubgroup ;
+                       rdfs:label "принадлежит побочной подгруппе"@ru .
+
+
+###  http://example.org/chemistry#belongsToPeriod
+:belongsToPeriod rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :ChemicalElement ;
+                 rdfs:range :Period ;
+                 rdfs:label "принадлежит периоду"@ru .
+
+
+###  http://example.org/chemistry#hasBond
+:hasBond rdf:type owl:ObjectProperty ;
+         rdfs:domain :Substance ;
+         rdfs:range :ChemicalBond ;
+         rdfs:label "имеет связь"@ru .
+
+
+###  http://example.org/chemistry#hasCentralIon
+:hasCentralIon rdf:type owl:ObjectProperty ;
+               rdfs:domain :ComplexIon ;
+               rdfs:range :Ion ;
+               rdfs:label "имеет центральный ион"@ru .
+
+
+###  http://example.org/chemistry#hasComponent
+:hasComponent rdf:type owl:ObjectProperty ;
+              rdfs:domain :Mixture ;
+              rdfs:range :Substance ;
+              rdfs:label "имеет компонент"@ru .
+
+
+###  http://example.org/chemistry#hasConstituentAtom
+:hasConstituentAtom rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Molecule ;
+                    rdfs:range :Atom ;
+                    rdfs:label "состоит из атомов"@ru .
+
+
+###  http://example.org/chemistry#hasConstituentElement
+:hasConstituentElement rdf:type owl:ObjectProperty ;
+                       rdfs:domain :ChemicalCompound ;
+                       rdfs:range :ChemicalElement ;
+                       rdfs:label "содержит элемент"@ru .
+
+
+###  http://example.org/chemistry#hasConstituentIon
+:hasConstituentIon rdf:type owl:ObjectProperty ;
+                   rdfs:domain :ChemicalCompound ;
+                   rdfs:range :Ion ;
+                   rdfs:label "содержит ион"@ru .
+
+
+###  http://example.org/chemistry#hasCounterIon
+:hasCounterIon rdf:type owl:ObjectProperty ;
+               rdfs:domain :ComplexCompound ;
+               rdfs:range :CounterIon ;
+               rdfs:label "имеет противоион"@ru .
+
+
+###  http://example.org/chemistry#hasElectronConfiguration
+:hasElectronConfiguration rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Atom ;
+                          rdfs:range :ElectronConfiguration ;
+                          rdfs:label "имеет электронную конфигурацию"@ru .
+
+
+###  http://example.org/chemistry#hasLattice
+:hasLattice rdf:type owl:ObjectProperty ;
+            rdfs:domain :Substance ;
+            rdfs:range :CrystalLattice ;
+            rdfs:label "имеет решётку"@ru .
+
+
+###  http://example.org/chemistry#hasLigand
+:hasLigand rdf:type owl:ObjectProperty ;
+           rdfs:domain :ComplexIon ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :Ion
+                                      :Molecule
+                                    )
+                      ] ;
+           rdfs:label "имеет лиганд"@ru .
+
+
+###  http://example.org/chemistry#hasOrbital
+:hasOrbital rdf:type owl:ObjectProperty ;
+            rdfs:domain :Atom ;
+            rdfs:range :Orbital ;
+            rdfs:label "имеет орбиталь"@ru .
+
+
+###  http://example.org/chemistry#isIsotopeOf
+:isIsotopeOf rdf:type owl:ObjectProperty ;
+             rdfs:domain :Isotope ;
+             rdfs:range :ChemicalElement ;
+             rdfs:label "является изотопом"@ru .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/chemistry#atomicNumber
+:atomicNumber rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :ChemicalElement ;
+              rdfs:range xsd:integer ;
+              rdfs:label "порядковый (атомный) номер"@ru ;
+              skos:note "Стр. 41." .
+
+
+###  http://example.org/chemistry#boilingPoint
+:boilingPoint rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Substance ;
+              rdfs:range xsd:decimal ;
+              rdfs:label "температура кипения"@ru .
+
+
+###  http://example.org/chemistry#coordinationNumber
+:coordinationNumber rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :ComplexIon ;
+                    rdfs:range xsd:integer ;
+                    rdfs:label "координационное число"@ru ;
+                    skos:note "Стр. 36." .
+
+
+###  http://example.org/chemistry#density
+:density rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Substance ;
+         rdfs:range xsd:decimal ;
+         rdfs:label "плотность"@ru .
+
+
+###  http://example.org/chemistry#electronegativity
+:electronegativity rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain :ChemicalElement ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:label "электроотрицательность"@ru ;
+                   skos:note "Стр. 41, 57." .
+
+
+###  http://example.org/chemistry#massNumber
+:massNumber rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Atom ;
+            rdfs:range xsd:integer ;
+            rdfs:label "массовое число"@ru ;
+            skos:note "Стр. 28." .
+
+
+###  http://example.org/chemistry#meltingPoint
+:meltingPoint rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Substance ;
+              rdfs:range xsd:decimal ;
+              rdfs:label "температура плавления"@ru .
+
+
+###  http://example.org/chemistry#oxidationState
+:oxidationState rdf:type owl:DatatypeProperty ;
+                rdfs:domain :ChemicalElement ;
+                rdfs:range xsd:integer ;
+                rdfs:label "степень окисления"@ru ;
+                skos:note "Стр. 59." .
+
+
+###  http://example.org/chemistry#relativeAtomicMass
+:relativeAtomicMass rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain :ChemicalElement ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:label "относительная атомная масса"@ru ;
+                    skos:note "Стр. 41." .
+
+
+###  http://example.org/chemistry#valence
+:valence rdf:type owl:DatatypeProperty ;
+         rdfs:domain :ChemicalElement ;
+         rdfs:range xsd:integer ;
+         rdfs:label "валентность"@ru ;
+         skos:definition "Число, показывающее, сколько атомов водорода может связать или заместить атом данного элемента."@ru ;
+         skos:note """Стр. 58. Валентность указывается римской цифрой вверху справа от символа.
+Примеры: Na(I), Fe(III), O(II), Cu(II)."""@ru .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/chemistry#Acid
+:Acid rdf:type owl:Class ;
+      rdfs:subClassOf :InorganicCompound ;
+      rdfs:label "Кислота"@ru ;
+      skos:definition "Химическое соединение, диссоциирующее в водном растворе (или в расплаве) на ионы водорода и ионы кислотного остатка (Аррениус); либо отдающее протон (Брёнстед)."@ru ;
+      skos:note "Стр. 15." .
+
+
+###  http://example.org/chemistry#AcidicOxide
+:AcidicOxide rdf:type owl:Class ;
+             rdfs:subClassOf :Oxide ;
+             owl:disjointWith :AmphotericOxide ,
+                              :BasicOxide ;
+             rdfs:label "Кислотный оксид"@ru ;
+             skos:definition "Оксид неметалла, образующий с водой кислоту, например CO₂."@ru ;
+             skos:note "Стр. 15." .
+
+
+###  http://example.org/chemistry#AmphotericOxide
+:AmphotericOxide rdf:type owl:Class ;
+                 rdfs:subClassOf :Oxide ;
+                 owl:disjointWith :BasicOxide ;
+                 rdfs:label "Амфотерный оксид"@ru ;
+                 skos:definition "Оксид, реагирующий с кислотой как основание, а с основанием как кислота, например Al₂O₃."@ru ;
+                 skos:note "Стр. 15." .
+
+
+###  http://example.org/chemistry#Anion
+:Anion rdf:type owl:Class ;
+       rdfs:subClassOf :Ion ;
+       owl:disjointWith :Cation ;
+       rdfs:label "Анион"@ru ;
+       skos:definition "Отрицательно заряженный ион."@ru ;
+       skos:note "Стр. 35. Примеры: Cl⁻, CH₃COO⁻, SO₄²⁻, OH⁻." .
+
+
+###  http://example.org/chemistry#Atom
+:Atom rdf:type owl:Class ;
+      rdfs:label "Атом"@ru ;
+      skos:definition "Частица, из которой построены молекулы; не разлагается на более мелкие части химическими реакциями. Состоит из ядра и оболочки. Число электронов в оболочке равно числу протонов в ядре; в целом атом электронейтрален."@ru ;
+      skos:note "Стр. 28." .
+
+
+###  http://example.org/chemistry#AtomicBond
+:AtomicBond rdf:type owl:Class ;
+            rdfs:subClassOf :ChemicalBond ;
+            owl:disjointWith :IonicBond ,
+                             :MetallicBond ;
+            rdfs:label "Атомная (ковалентная) связь"@ru ;
+            skos:definition "Химическая связь, создаваемая общей электронной парой (перекрывание орбиталей)."@ru ;
+            skos:note "Стр. 48." .
+
+
+###  http://example.org/chemistry#AtomicLattice
+:AtomicLattice rdf:type owl:Class ;
+               rdfs:subClassOf :CrystalLattice ;
+               owl:disjointWith :IonicLattice ,
+                                :MetallicLattice ,
+                                :MolecularLattice ;
+               rdfs:label "Атомная решётка"@ru .
+
+
+###  http://example.org/chemistry#AtomicNucleus
+:AtomicNucleus rdf:type owl:Class ;
+               rdfs:label "Ядро атома"@ru ;
+               skos:definition "Часть атома в его центре, заряжена положительно; в ядре сосредоточена основная масса атома."@ru ;
+               skos:note "Стр. 28." .
+
+
+###  http://example.org/chemistry#Base
+:Base rdf:type owl:Class ;
+      rdfs:subClassOf :InorganicCompound ;
+      rdfs:label "Основание"@ru ;
+      skos:definition "Химическое соединение, диссоциирующее в водном растворе (или в расплаве) на ионы металла и гидроксид-ионы (Аррениус); либо принимающее протоны (Брёнстед)."@ru ;
+      skos:note "Стр. 16." .
+
+
+###  http://example.org/chemistry#BasicOxide
+:BasicOxide rdf:type owl:Class ;
+            rdfs:subClassOf :Oxide ;
+            rdfs:label "Основной оксид"@ru ;
+            skos:definition "Оксид металла, образующий с водой основание, например CaO."@ru ;
+            skos:note "Стр. 15." .
+
+
+###  http://example.org/chemistry#Catalysis
+:Catalysis rdf:type owl:Class ;
+           rdfs:label "Катализ"@ru ;
+           skos:note "Стр. 74; на этой странице дано определение катализатора, а не процесса катализа."@ru .
+
+
+###  http://example.org/chemistry#Catalyst
+:Catalyst rdf:type owl:Class ;
+          rdfs:label "Катализатор"@ru ;
+          skos:definition "Вещество, участвующее в реакции и изменяющее энергию активации прямой и обратной реакций; оно изменяет время установления равновесия, но не положение равновесия и не теплоту реакции. По окончании реакции катализатор остаётся неизменным."@ru ;
+          skos:note "Стр. 74." .
+
+
+###  http://example.org/chemistry#Cation
+:Cation rdf:type owl:Class ;
+        rdfs:subClassOf :Ion ;
+        rdfs:label "Катион"@ru ;
+        skos:definition "Положительно заряженный ион."@ru ;
+        skos:note "Стр. 36. Примеры: Na⁺, Mg²⁺, NH₄⁺." .
+
+
+###  http://example.org/chemistry#ChemicalBond
+:ChemicalBond rdf:type owl:Class ;
+              rdfs:label "Химическая связь"@ru .
+
+
+###  http://example.org/chemistry#ChemicalCompound
+:ChemicalCompound rdf:type owl:Class ;
+                  rdfs:subClassOf :PureSubstance ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasConstituentElement ;
+                                    owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :ChemicalElement
+                                  ] ;
+                  rdfs:label "Химическое соединение"@ru ;
+                  skos:definition "Вещество, состоящее по крайней мере из двух связанных между собой элементов, массы которых находятся в определённом (стехиометрическом) соотношении."@ru ;
+                  skos:note "Стр. 13." .
+
+
+###  http://example.org/chemistry#ChemicalElement
+:ChemicalElement rdf:type owl:Class ;
+                 rdfs:subClassOf :PureSubstance ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :belongsToPeriod ;
+                                   owl:cardinality "1"^^xsd:nonNegativeInteger
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :belongsToMainSubgroup ;
+                                   owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :MainSubgroup
+                                 ] ;
+                 rdfs:label "Химический элемент"@ru ;
+                 skos:definition "Вещество, все атомы которого имеют один и тот же заряд ядра."@ru ;
+                 skos:note "Стр. 13. Прим. ред.: в практике средней школы ГДР не проводится различие между понятиями элемента и простого вещества." .
+
+
+###  http://example.org/chemistry#ChemicalReaction
+:ChemicalReaction rdf:type owl:Class ;
+                  rdfs:label "Химическая реакция"@ru ;
+                  skos:definition "Процесс превращения исходных веществ в другие вещества."@ru ;
+                  skos:note "Определение дано на стр. 61; раздел о химических реакциях продолжается до стр. 96."@ru .
+
+
+###  http://example.org/chemistry#ComplexCompound
+:ComplexCompound rdf:type owl:Class ;
+                 rdfs:subClassOf :ChemicalCompound ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasCounterIon ;
+                                   owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                 ] ;
+                 rdfs:label "Комплексное соединение"@ru ;
+                 skos:definition "Соединение, образующееся при присоединении молекул или ионов к другим атомам или ионам. Состоит из комплексных ионов и противоионов."@ru ;
+                 skos:note "Стр. 17." .
+
+
+###  http://example.org/chemistry#ComplexIon
+:ComplexIon rdf:type owl:Class ;
+            rdfs:subClassOf :Ion ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasCentralIon ;
+                              owl:cardinality "1"^^xsd:nonNegativeInteger
+                            ] ;
+            rdfs:label "Комплексный ион"@ru ;
+            skos:definition "Ион, образованный присоединением молекул или ионов к другим атомам или ионам."@ru ;
+            skos:note "Стр. 36." .
+
+
+###  http://example.org/chemistry#CompositeIon
+:CompositeIon rdf:type owl:Class ;
+              rdfs:subClassOf :Ion ;
+              owl:disjointWith :SimpleIon ;
+              rdfs:label "Составной ион"@ru .
+
+
+###  http://example.org/chemistry#CoordinateBond
+:CoordinateBond rdf:type owl:Class ;
+                rdfs:subClassOf :AtomicBond ;
+                rdfs:label "Координационная связь"@ru ;
+                skos:definition "Особая форма атомной связи. Связывающая пара электронов предоставляется одной из реагирующих частиц; обозначается стрелкой."@ru ;
+                skos:note "Стр. 55." .
+
+
+###  http://example.org/chemistry#CounterIon
+:CounterIon rdf:type owl:Class ;
+            rdfs:subClassOf :Ion ;
+            rdfs:label "Противоион"@ru .
+
+
+###  http://example.org/chemistry#CrystalLattice
+:CrystalLattice rdf:type owl:Class ;
+                rdfs:label "Кристаллическая решётка"@ru ;
+                skos:definition "Пространственное расположение частиц и наличие определённых связей между ними."@ru ;
+                skos:note "Стр. 38." .
+
+
+###  http://example.org/chemistry#DOrbital
+:DOrbital rdf:type owl:Class ;
+          rdfs:subClassOf :Orbital ;
+          rdfs:label "d-орбиталь"@ru .
+
+
+###  http://example.org/chemistry#Dipole
+:Dipole rdf:type owl:Class ;
+        rdfs:subClassOf :Molecule ;
+        rdfs:label "Диполь"@ru ;
+        skos:definition "В целом электронейтральная молекула, в которой центры тяжести положительного и отрицательного заряда разделены."@ru ;
+        skos:note "Стр. 37." .
+
+
+###  http://example.org/chemistry#DissociationEquation
+:DissociationEquation rdf:type owl:Class ;
+                      rdfs:label "Уравнение диссоциации"@ru ;
+                      skos:definition "Способ изображения, отражающий качественные и количественные изменения при диссоциации вещества."@ru ;
+                      skos:note "Стр. 27. Пример: CaCl₂ → Ca²⁺ + 2Cl⁻." .
+
+
+###  http://example.org/chemistry#Electron
+:Electron rdf:type owl:Class ;
+          rdfs:label "Электрон"@ru ;
+          skos:definition "Отрицательно заряженная частица, движущаяся вокруг ядра в оболочке атома; число электронов в оболочке нейтрального атома равно числу протонов в ядре."@ru ;
+          skos:note "Стр. 29." .
+
+
+###  http://example.org/chemistry#ElectronConfiguration
+:ElectronConfiguration rdf:type owl:Class ;
+                       rdfs:label "Электронная конфигурация"@ru ;
+                       skos:definition "Занятие (заселение) орбиталей электронами."@ru ;
+                       skos:note "Стр. 33. H 1s¹; He 1s²; Li 1s²2s¹; Be 1s²2s²; B 1s²2s²2p¹; C 1s²2s²2p²; N 1s²2s²2p³; O 1s²2s²2p⁴; F 1s²2s²2p⁵; Ne 1s²2s²2p⁶." .
+
+
+###  http://example.org/chemistry#ElectronegativityDifferenceRule
+:ElectronegativityDifferenceRule rdf:type owl:Class ;
+                                 rdfs:label "Правило различия электроотрицательностей"@ru ;
+                                 skos:definition "Δχ < 1,7 → преимущественно атомная связь; Δχ > 1,7 → преимущественно ионная связь."@ru ;
+                                 skos:note """
+Δχ = |χ(A) − χ(B)|
+  Δχ < 1,7 → преимущественно атомная связь
+  Δχ > 1,7 → преимущественно ионная связь
+Примеры:
+  HCl: Δχ = 0,9 → атомная связь, молекула
+  H₂O: Δχ = 1,4 → атомная связь, молекула
+  NaCl: Δχ = 2,1 → ионная связь, ионный кристалл
+  CaO: Δχ = 2,5 → ионная связь, ионный кристалл
+"""@ru ,
+                                           "Стр. 57." .
+
+
+###  http://example.org/chemistry#EnergyLevel
+:EnergyLevel rdf:type owl:Class ;
+             rdfs:label "Энергетический уровень"@ru ;
+             skos:note "Стр. 29: уровень 1 — 2 e⁻ (1s); уровень 2 — 8 e⁻ (2s, 2p); уровень 3 — 18 e⁻ (3s, 3p, 3d); уровень 4 — 32 e⁻ (4s, 4p, 4d, 4f)." .
+
+
+###  http://example.org/chemistry#FOrbital
+:FOrbital rdf:type owl:Class ;
+          rdfs:subClassOf :Orbital ;
+          rdfs:label "f-орбиталь"@ru .
+
+
+###  http://example.org/chemistry#Group
+:Group rdf:type owl:Class ;
+       rdfs:label "Группа"@ru ;
+       skos:definition "Вертикальный ряд (колонка) в периодической системе; делится на главную и побочную подгруппы."@ru ;
+       skos:note "Стр. 42." .
+
+
+###  http://example.org/chemistry#HighMolecularSubstance
+:HighMolecularSubstance rdf:type owl:Class ;
+                        rdfs:subClassOf :Mixture ;
+                        rdfs:label "Высокомолекулярное вещество"@ru ;
+                        skos:definition "Смеси одинаковых по химическому составу макромолекул, которые имеют разную величину и реагируют как одно целое."@ru ;
+                        skos:note "Стр. 17. Природные: полисахариды, полипептиды, натуральный каучук. Синтетические: пластмассы, эластомеры, химические волокна." .
+
+
+###  http://example.org/chemistry#Hybridization
+:Hybridization rdf:type owl:Class ;
+               rdfs:label "Гибридизация"@ru ;
+               skos:definition "Превращение орбиталей различных энергетических уровней и формы в одинаковые гибридные орбитали."@ru ;
+               skos:note "Стр. 34." .
+
+
+###  http://example.org/chemistry#InorganicCompound
+:InorganicCompound rdf:type owl:Class ;
+                   rdfs:subClassOf :ChemicalCompound ;
+                   owl:disjointWith :OrganicCompound ;
+                   rdfs:label "Неорганическое соединение"@ru ;
+                   skos:note "Стр. 13–15. Виды: оксид, кислота, основание, соль." .
+
+
+###  http://example.org/chemistry#Ion
+:Ion rdf:type owl:Class ;
+     rdfs:label "Ион"@ru ;
+     skos:definition "Положительно или отрицательно заряженная частица, образующаяся из атома или группы атомов при принятии или отдаче электронов; обладает подвижностью в водных растворах кислот, оснований и солей."@ru ;
+     skos:note "Стр. 35." .
+
+
+###  http://example.org/chemistry#IonicBond
+:IonicBond rdf:type owl:Class ;
+           rdfs:subClassOf :ChemicalBond ;
+           owl:disjointWith :MetallicBond .
+
+
+###  http://example.org/chemistry#IonicLattice
+:IonicLattice rdf:type owl:Class ;
+              rdfs:subClassOf :CrystalLattice ;
+              owl:disjointWith :MetallicLattice ,
+                               :MolecularLattice .
+
+
+###  http://example.org/chemistry#Isotope
+:Isotope rdf:type owl:Class ;
+         rdfs:subClassOf :Atom ;
+         rdfs:label "Изотоп"@ru ;
+         skos:definition "Атомы одного элемента с одинаковым числом протонов, но разным числом нейтронов."@ru ;
+         skos:note "Стр. 34." .
+
+
+###  http://example.org/chemistry#Macromolecule
+:Macromolecule rdf:type owl:Class ;
+               rdfs:subClassOf :Molecule ;
+               rdfs:label "Макромолекула"@ru ;
+               skos:definition "Молекула, образовавшаяся из большого числа (до многих тысяч) одинаковых или различных малых молекул. Относительная масса > 10 000."@ru ;
+               skos:note "Стр. 37." .
+
+
+###  http://example.org/chemistry#MainSubgroup
+:MainSubgroup rdf:type owl:Class ;
+              rdfs:subClassOf :Group ;
+              owl:disjointWith :SideSubgroup ;
+              rdfs:label "Главная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#Metal
+:Metal rdf:type owl:Class ;
+       rdfs:subClassOf :ChemicalElement ;
+       owl:disjointWith :Metalloid ,
+                        :Nonmetal ;
+       rdfs:label "Металл"@ru ;
+       skos:definition "Элемент, характерным свойством которого является хорошая теплопроводность, электропроводность и металлический блеск."@ru ;
+       skos:note "Стр. 13. Деление: лёгкие (ρ < 5 г/см³) / тяжёлые (ρ > 5 г/см³); легкоплавкие (T.пл. < 1000 °C) / тугоплавкие (T.пл. > 1000 °C); благородные / неблагородные." .
+
+
+###  http://example.org/chemistry#MetallicBond
+:MetallicBond rdf:type owl:Class ;
+              rdfs:subClassOf :ChemicalBond ;
+              rdfs:label "Металлическая связь"@ru ;
+              skos:definition "Химическая связь, образующаяся в результате электрического притяжения между ионами металла и свободными электронами."@ru ;
+              skos:note "Стр. 56." .
+
+
+###  http://example.org/chemistry#MetallicLattice
+:MetallicLattice rdf:type owl:Class ;
+                 rdfs:subClassOf :CrystalLattice ;
+                 owl:disjointWith :MolecularLattice ;
+                 rdfs:label "Металлическая решётка"@ru .
+
+
+###  http://example.org/chemistry#Metalloid
+:Metalloid rdf:type owl:Class ;
+           rdfs:subClassOf :ChemicalElement ;
+           owl:disjointWith :Nonmetal ;
+           rdfs:label "Полуметалл"@ru ;
+           skos:definition "Элемент, проявляющий свойства как металла, так и неметалла. Бор, кремний, германий, мышьяк, селен."@ru ;
+           skos:note "Стр. 14." .
+
+
+###  http://example.org/chemistry#Mixture
+:Mixture rdf:type owl:Class ;
+         rdfs:subClassOf :Substance ;
+         owl:disjointWith :PureSubstance ;
+         rdfs:label "Смесь веществ"@ru ;
+         skos:definition "Вещество, состоящее из частиц нескольких веществ."@ru ;
+         skos:note "Стр. 13." .
+
+
+###  http://example.org/chemistry#Modification
+:Modification rdf:type owl:Class ;
+              rdfs:label "Модификация"@ru ;
+              skos:definition "Различные видимые формы элементов и соединений, обусловленные различным расположением атомов в решётке."@ru ;
+              skos:note "Стр. 38." .
+
+
+###  http://example.org/chemistry#MolecularLattice
+:MolecularLattice rdf:type owl:Class ;
+                  rdfs:subClassOf :CrystalLattice ;
+                  rdfs:label "Молекулярная решётка"@ru .
+
+
+###  http://example.org/chemistry#Molecule
+:Molecule rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasConstituentAtom ;
+                            owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Atom
+                          ] ;
+          rdfs:label "Молекула"@ru ;
+          skos:definition "Наименьшая частица химического соединения или элемента. Состоит не менее чем из двух атомов."@ru ;
+          skos:note "Стр. 37." .
+
+
+###  http://example.org/chemistry#Neutron
+:Neutron rdf:type owl:Class ;
+         owl:disjointWith :Proton ;
+         rdfs:label "Нейтрон"@ru ;
+         skos:definition "Электрически нейтральная частица, входящая в состав ядра атома."@ru ;
+         skos:note "Стр. 29." .
+
+
+###  http://example.org/chemistry#Nonmetal
+:Nonmetal rdf:type owl:Class ;
+          rdfs:subClassOf :ChemicalElement ;
+          rdfs:label "Неметалл"@ru ;
+          skos:definition "Элемент, не имеющий никаких или имеющий лишь некоторые признаки металла. Обладает низкой тепло- и электропроводностью. Хлор, азот, сера, кислород, фосфор, водород."@ru ;
+          skos:note "Стр. 14." .
+
+
+###  http://example.org/chemistry#Nucleon
+:Nucleon rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:unionOf ( :Neutron
+                                             :Proton
+                                           )
+                             ] ;
+         rdfs:label "Нуклон"@ru ;
+         skos:definition "Протоны и нейтроны, входящие в состав ядра атома."@ru ;
+         skos:note "Стр. 28. Сумма числа протонов и нейтронов равна массовому числу." .
+
+
+###  http://example.org/chemistry#Orbital
+:Orbital rdf:type owl:Class ;
+         rdfs:label "Орбиталь"@ru ;
+         skos:definition "Область атомной оболочки, вероятность пребывания электрона в которой достигает 90 %; на ней может находиться не более двух электронов."@ru ;
+         skos:note """
+Максимальное число электронов на уровнях (стр. 29):
+  1: 2 e⁻ (1s)
+  2: 8 e⁻ (2s, 2p)
+  3: 18 e⁻ (3s, 3p, 3d)
+  4: 32 e⁻ (4s, 4p, 4d, 4f)
+"""@ru ,
+                   "Стр. 32." .
+
+
+###  http://example.org/chemistry#OrganicCompound
+:OrganicCompound rdf:type owl:Class ;
+                 rdfs:subClassOf :ChemicalCompound ;
+                 rdfs:label "Органическое соединение"@ru ;
+                 skos:note "Стр. 15. Виды: углеводород, спирт, альдегид, кетон, карбоновая кислота." .
+
+
+###  http://example.org/chemistry#Oxide
+:Oxide rdf:type owl:Class ;
+       rdfs:subClassOf :InorganicCompound ;
+       rdfs:label "Оксид"@ru .
+
+
+###  http://example.org/chemistry#POrbital
+:POrbital rdf:type owl:Class ;
+          rdfs:subClassOf :Orbital ;
+          rdfs:label "p-орбиталь"@ru .
+
+
+###  http://example.org/chemistry#PartiallyIonicBond
+:PartiallyIonicBond rdf:type owl:Class ;
+                    rdfs:subClassOf :AtomicBond .
+
+
+###  http://example.org/chemistry#Period
+:Period rdf:type owl:Class ;
+        rdfs:label "Период"@ru ;
+        skos:definition "Горизонтальный ряд периодической таблицы. Число заполненных оболочек = номер периода."@ru ;
+        skos:note "Стр. 41." .
+
+
+###  http://example.org/chemistry#PeriodicLaw
+:PeriodicLaw rdf:type owl:Class ;
+             rdfs:label "Закон периодичности"@ru ;
+             skos:definition "Периодическое изменение строения атомной оболочки элементов определяет периодичность изменения свойств элементов (Д.И. Менделеев, 1869 г.)."@ru ;
+             skos:note "Стр. 41." .
+
+
+###  http://example.org/chemistry#PeriodicTable
+:PeriodicTable rdf:type owl:Class ;
+               rdfs:label "Периодическая система элементов"@ru ;
+               skos:definition "Таблица, в которой в основу упорядочения химических элементов положено строение их атомов."@ru ;
+               skos:note """
+Сведения, получаемые о каждом элементе (стр. 41):
+  • Порядковый (атомный) номер = заряд ядра = число протонов = число электронов
+  • Относительная атомная масса
+  • Электроотрицательность
+  • Название
+  • Символ
+"""@ru ,
+                         "Стр. 41–47." .
+
+
+###  http://example.org/chemistry#PiBond
+:PiBond rdf:type owl:Class ;
+        rdfs:subClassOf :AtomicBond ;
+        owl:disjointWith :SigmaBond ;
+        rdfs:label "π-Связь"@ru .
+
+
+###  http://example.org/chemistry#Proton
+:Proton rdf:type owl:Class ;
+        rdfs:label "Протон"@ru ;
+        skos:definition "Положительно заряженная частица ядра атома; число протонов определяет заряд ядра и порядковый номер элемента."@ru ;
+        skos:note "Стр. 29." .
+
+
+###  http://example.org/chemistry#PureSubstance
+:PureSubstance rdf:type owl:Class ;
+               rdfs:subClassOf :Substance ;
+               rdfs:label "Чистое вещество"@ru ;
+               skos:definition "Вещество, состоящее из частиц только одного вещества."@ru ;
+               skos:note "Стр. 12." .
+
+
+###  http://example.org/chemistry#ReactionEquation
+:ReactionEquation rdf:type owl:Class ;
+                  rdfs:label "Уравнение реакции"@ru ;
+                  skos:definition "Способ написания, дающий представление о качественных и количественных изменениях при реакции."@ru ;
+                  skos:note "Стр. 22. Пример: CH₄ + 2O₂ → CO₂ + 2H₂O." .
+
+
+###  http://example.org/chemistry#SOrbital
+:SOrbital rdf:type owl:Class ;
+          rdfs:subClassOf :Orbital ;
+          rdfs:label "s-орбиталь"@ru .
+
+
+###  http://example.org/chemistry#Salt
+:Salt rdf:type owl:Class ;
+      rdfs:subClassOf :InorganicCompound ;
+      rdfs:label "Соль"@ru ;
+      skos:definition "Химическое соединение, диссоциирующее в водном растворе на катионы металла (или аммония) и анионы кислотного остатка."@ru ;
+      skos:note "Стр. 16." .
+
+
+###  http://example.org/chemistry#SideSubgroup
+:SideSubgroup rdf:type owl:Class ;
+              rdfs:subClassOf :Group ;
+              rdfs:label "Побочная подгруппа"@ru ;
+              skos:definition "Подгруппа периодической системы, противопоставленная главной подгруппе."@ru ;
+              skos:note "Стр. 42." .
+
+
+###  http://example.org/chemistry#SigmaBond
+:SigmaBond rdf:type owl:Class ;
+           rdfs:subClassOf :AtomicBond ;
+           rdfs:label "σ-Связь"@ru .
+
+
+###  http://example.org/chemistry#SimpleIon
+:SimpleIon rdf:type owl:Class ;
+           rdfs:subClassOf :Ion ;
+           rdfs:label "Простой ион"@ru .
+
+
+###  http://example.org/chemistry#Spin
+:Spin rdf:type owl:Class ;
+      rdfs:label "Спин"@ru ;
+      skos:note "Стр. 32." .
+
+
+###  http://example.org/chemistry#Substance
+:Substance rdf:type owl:Class ;
+           owl:disjointUnionOf ( :Mixture
+                                 :PureSubstance
+                               ) ;
+           rdfs:label "Вещество"@ru ;
+           skos:definition "Всё, что состоит из частиц одного или нескольких химических элементов, находится в твёрдом, жидком или газообразном состоянии, имеет массу и объём."@ru ;
+           skos:note "Стр. 12." .
+
+
+###  http://example.org/chemistry#Zwitterion
+:Zwitterion rdf:type owl:Class ;
+            rdfs:subClassOf :Ion ;
+            rdfs:label "Биполярный ион (цвиттер-ион)"@ru ;
+            skos:definition "Ион, имеющий два противоположных заряда."@ru ;
+            skos:note "Стр. 36. Пример: ион глицина." .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/chemistry#Ag
+:Ag rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupI ;
+    :belongsToPeriod :Period5 ;
+    :atomicNumber 47 ;
+    rdfs:label "Серебро"@ru ;
+    skos:note "Благородный металл." .
+
+
+###  http://example.org/chemistry#AgS2O3_2
+:AgS2O3_2 rdf:type owl:NamedIndividual ,
+                   :Anion ,
+                   :ComplexIon ;
+          :hasCentralIon :AgPlus ;
+          rdfs:label "Дитиосульфатоаргентат-ион"@ru .
+
+
+###  http://example.org/chemistry#AgPlus
+:AgPlus rdf:type owl:NamedIndividual ,
+                 :Cation ,
+                 :SimpleIon ;
+        rdfs:label "Ион серебра(I)"@ru .
+
+
+###  http://example.org/chemistry#Al
+:Al rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupIII ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 13 ;
+    rdfs:label "Алюминий"@ru .
+
+
+###  http://example.org/chemistry#Al2O3
+:Al2O3 rdf:type owl:NamedIndividual ,
+                :AmphotericOxide ;
+       :hasConstituentElement :Al ,
+                              :O ;
+       rdfs:label "Оксид алюминия"@ru .
+
+
+###  http://example.org/chemistry#Ar
+:Ar rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Nonmetal ;
+    :belongsToMainSubgroup :GroupVIII ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 18 ;
+    rdfs:label "Аргон"@ru .
+
+
+###  http://example.org/chemistry#As
+:As rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metalloid ;
+    :belongsToMainSubgroup :GroupV ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 33 ;
+    rdfs:label "Мышьяк"@ru .
+
+
+###  http://example.org/chemistry#Au
+:Au rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupI ;
+    :belongsToPeriod :Period6 ;
+    :atomicNumber 79 ;
+    rdfs:label "Золото"@ru ;
+    skos:note "Благородный металл." .
+
+
+###  http://example.org/chemistry#B
+:B rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Metalloid ;
+   :belongsToMainSubgroup :GroupIII ;
+   :belongsToPeriod :Period2 ;
+   :atomicNumber 5 ;
+   rdfs:label "Бор"@ru .
+
+
+###  http://example.org/chemistry#Be
+:Be rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupII ;
+    :belongsToPeriod :Period2 ;
+    :atomicNumber 4 ;
+    rdfs:label "Бериллий"@ru .
+
+
+###  http://example.org/chemistry#Br
+:Br rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Nonmetal ;
+    :belongsToMainSubgroup :GroupVII ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 35 ;
+    rdfs:label "Бром"@ru .
+
+
+###  http://example.org/chemistry#C
+:C rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupIV ;
+   :belongsToPeriod :Period2 ;
+   :atomicNumber 6 ;
+   :electronegativity 2.5 ;
+   :relativeAtomicMass 12.011 ;
+   rdfs:label "Углерод"@ru ;
+   skos:note "Изотопы: ¹²₆C (6 p, 6 n) и ¹³₆C (6 p, 7 n)." .
+
+
+###  http://example.org/chemistry#C2H2
+:C2H2 rdf:type owl:NamedIndividual ,
+               :OrganicCompound ;
+      :hasConstituentElement :C ,
+                             :H ;
+      rdfs:label "Ацетилен"@ru ;
+      skos:note "C₂H₂. Тройная связь (σ + 2π)." .
+
+
+###  http://example.org/chemistry#C2H4
+:C2H4 rdf:type owl:NamedIndividual ,
+               :OrganicCompound ;
+      :hasConstituentElement :C ,
+                             :H ;
+      rdfs:label "Этилен"@ru ;
+      skos:note "C₂H₄. Двойная связь (σ + π)." .
+
+
+###  http://example.org/chemistry#C2H5CHO
+:C2H5CHO rdf:type owl:NamedIndividual ,
+                  :OrganicCompound ;
+         :hasConstituentElement :C ,
+                                :H ,
+                                :O ;
+         rdfs:label "Пропаналь (пропионовый альдегид)"@ru .
+
+
+###  http://example.org/chemistry#C2H6
+:C2H6 rdf:type owl:NamedIndividual ,
+               :OrganicCompound ;
+      :hasConstituentElement :C ,
+                             :H ;
+      rdfs:label "Этан"@ru ;
+      skos:note "C₂H₆. Шесть sp³–s-σ и одна sp³–sp³-σ." .
+
+
+###  http://example.org/chemistry#C3H7COOH
+:C3H7COOH rdf:type owl:NamedIndividual ,
+                   :OrganicCompound ;
+          :hasConstituentElement :C ,
+                                 :H ,
+                                 :O ;
+          rdfs:label "Бутановая (масляная) кислота"@ru .
+
+
+###  http://example.org/chemistry#C4H10
+:C4H10 rdf:type owl:NamedIndividual ,
+                :OrganicCompound ;
+       :hasConstituentElement :C ,
+                              :H ;
+       rdfs:label "Бутан"@ru .
+
+
+###  http://example.org/chemistry#C6H6
+:C6H6 rdf:type owl:NamedIndividual ,
+               :OrganicCompound ;
+      :hasConstituentElement :C ,
+                             :H ;
+      rdfs:label "Бензол"@ru ;
+      skos:note "C₆H₆. π-электронный секстет." .
+
+
+###  http://example.org/chemistry#CH3CHO
+:CH3CHO rdf:type owl:NamedIndividual ,
+                 :OrganicCompound ;
+        :hasConstituentElement :C ,
+                               :H ,
+                               :O ;
+        rdfs:label "Этаналь (ацетальдегид)"@ru .
+
+
+###  http://example.org/chemistry#CH3COCH3
+:CH3COCH3 rdf:type owl:NamedIndividual ,
+                   :OrganicCompound ;
+          :hasConstituentElement :C ,
+                                 :H ,
+                                 :O ;
+          rdfs:label "Диметилкетон (ацетон)"@ru .
+
+
+###  http://example.org/chemistry#CH3COOH
+:CH3COOH rdf:type owl:NamedIndividual ,
+                  :OrganicCompound ;
+         :hasConstituentElement :C ,
+                                :H ,
+                                :O ;
+         rdfs:label "Этановая (уксусная) кислота"@ru ;
+         skos:note "CH₃COOH ⇌ H⁺ + CH₃COO⁻." .
+
+
+###  http://example.org/chemistry#CH3OH
+:CH3OH rdf:type owl:NamedIndividual ,
+                :OrganicCompound ;
+       :hasConstituentElement :C ,
+                              :H ,
+                              :O ;
+       rdfs:label "Метанол"@ru .
+
+
+###  http://example.org/chemistry#CH4
+:CH4 rdf:type owl:NamedIndividual ,
+              :OrganicCompound ;
+     :hasConstituentElement :C ,
+                            :H ;
+     rdfs:label "Метан"@ru ;
+     skos:note "CH₄. Четыре sp³–s-σ-связи." .
+
+
+###  http://example.org/chemistry#CO2
+:CO2 rdf:type owl:NamedIndividual ,
+              :AcidicOxide ;
+     :hasConstituentElement :C ,
+                            :O ;
+     rdfs:label "Диоксид углерода (углекислый газ)"@ru .
+
+
+###  http://example.org/chemistry#Ca
+:Ca rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupII ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 20 ;
+    :electronegativity 1.0 ;
+    rdfs:label "Кальций"@ru .
+
+
+###  http://example.org/chemistry#CaCl2
+:CaCl2 rdf:type owl:NamedIndividual ,
+                :Salt ;
+       :hasConstituentElement :Ca ,
+                              :Cl ;
+       rdfs:label "Хлорид кальция"@ru .
+
+
+###  http://example.org/chemistry#CaO
+:CaO rdf:type owl:NamedIndividual ,
+              :BasicOxide ;
+     :hasConstituentElement :Ca ,
+                            :O ;
+     rdfs:label "Оксид кальция"@ru .
+
+
+###  http://example.org/chemistry#CaOH2
+:CaOH2 rdf:type owl:NamedIndividual ,
+                :Base ;
+       :hasConstituentElement :Ca ,
+                              :H ,
+                              :O ;
+       rdfs:label "Гидроксид кальция"@ru .
+
+
+###  http://example.org/chemistry#Cl
+:Cl rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Nonmetal ;
+    :belongsToMainSubgroup :GroupVII ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 17 ;
+    :electronegativity 3.0 ;
+    rdfs:label "Хлор"@ru .
+
+
+###  http://example.org/chemistry#Cl2
+:Cl2 rdf:type owl:NamedIndividual ,
+              :Substance ;
+     rdfs:label "Хлор (простое вещество)"@ru ;
+     skos:note "Cl₂, p–p-σ-связь." .
+
+
+###  http://example.org/chemistry#Cr
+:Cr rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupVI ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 24 ;
+    :density 7.19 ;
+    rdfs:label "Хром"@ru .
+
+
+###  http://example.org/chemistry#Cu
+:Cu rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupI ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 29 ;
+    :meltingPoint 1083 ;
+    :valence 2 ;
+    rdfs:label "Медь"@ru .
+
+
+###  http://example.org/chemistry#CuNH3_4
+:CuNH3_4 rdf:type owl:NamedIndividual ,
+                  :Cation ,
+                  :ComplexIon ;
+         :hasCentralIon :Cu2Plus ;
+         :coordinationNumber 4 ;
+         rdfs:label "Тетраамминмедь(II)-ион"@ru .
+
+
+###  http://example.org/chemistry#CuNH3_4SO4
+:CuNH3_4SO4 rdf:type owl:NamedIndividual ,
+                     :ComplexCompound ;
+            :hasCounterIon :SO4_2 ;
+            rdfs:label "Сульфат тетраамминмеди(II)"@ru .
+
+
+###  http://example.org/chemistry#Cu2Plus
+:Cu2Plus rdf:type owl:NamedIndividual ,
+                  :Cation ,
+                  :SimpleIon ;
+         rdfs:label "Ион меди(II)"@ru .
+
+
+###  http://example.org/chemistry#CuSO4
+:CuSO4 rdf:type owl:NamedIndividual ,
+                :Salt ;
+       :hasConstituentElement :Cu ,
+                              :O ,
+                              :S ;
+       rdfs:label "Сульфат меди(II)"@ru .
+
+
+###  http://example.org/chemistry#F
+:F rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupVII ;
+   :belongsToPeriod :Period2 ;
+   :atomicNumber 9 ;
+   rdfs:label "Фтор"@ru .
+
+
+###  http://example.org/chemistry#Fe
+:Fe rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupVIII ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 26 ;
+    :density 7.86 ;
+    :meltingPoint 1535 ;
+    rdfs:label "Железо"@ru .
+
+
+###  http://example.org/chemistry#FeS2
+:FeS2 rdf:type owl:NamedIndividual ,
+               :Substance ;
+      rdfs:label "Пирит"@ru ;
+      skos:note "FeS₂. 4FeS₂ + 11O₂ → 2Fe₂O₃ + 8SO₂." .
+
+
+###  http://example.org/chemistry#Ge
+:Ge rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metalloid ;
+    :belongsToMainSubgroup :GroupIV ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 32 ;
+    rdfs:label "Германий"@ru .
+
+
+###  http://example.org/chemistry#GroupI
+:GroupI rdf:type owl:NamedIndividual ,
+                 :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupII
+:GroupII rdf:type owl:NamedIndividual ,
+                  :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupIII
+:GroupIII rdf:type owl:NamedIndividual ,
+                   :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupIV
+:GroupIV rdf:type owl:NamedIndividual ,
+                  :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupV
+:GroupV rdf:type owl:NamedIndividual ,
+                 :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupVI
+:GroupVI rdf:type owl:NamedIndividual ,
+                  :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupVII
+:GroupVII rdf:type owl:NamedIndividual ,
+                   :MainSubgroup .
+
+
+###  http://example.org/chemistry#GroupVIII
+:GroupVIII rdf:type owl:NamedIndividual ,
+                    :MainSubgroup .
+
+
+###  http://example.org/chemistry#SideGroupI
+:SideGroupI rdf:type owl:NamedIndividual ,
+                     :SideSubgroup ;
+            rdfs:label "I группа, побочная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#SideGroupII
+:SideGroupII rdf:type owl:NamedIndividual ,
+                      :SideSubgroup ;
+             rdfs:label "II группа, побочная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#SideGroupVI
+:SideGroupVI rdf:type owl:NamedIndividual ,
+                      :SideSubgroup ;
+             rdfs:label "VI группа, побочная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#SideGroupVII
+:SideGroupVII rdf:type owl:NamedIndividual ,
+                       :SideSubgroup ;
+              rdfs:label "VII группа, побочная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#SideGroupVIII
+:SideGroupVIII rdf:type owl:NamedIndividual ,
+                        :SideSubgroup ;
+               rdfs:label "VIII группа, побочная подгруппа"@ru .
+
+
+###  http://example.org/chemistry#H
+:H rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupI ;
+   :belongsToPeriod :Period1 ;
+   :atomicNumber 1 ;
+   :electronegativity 2.1 ;
+   :relativeAtomicMass 1.008 ;
+   :valence 1 ;
+   rdfs:label "Водород"@ru .
+
+
+###  http://example.org/chemistry#H2
+:H2 rdf:type owl:NamedIndividual ,
+             :Substance ;
+    rdfs:label "Водород (простое вещество)"@ru ;
+    skos:note "H₂, s–s-σ-связь." .
+
+
+###  http://example.org/chemistry#H2O
+:H2O rdf:type owl:NamedIndividual ,
+              :ChemicalCompound ;
+     :hasBond :PartiallyIonicBond ;
+     :hasConstituentElement :H ,
+                            :O ;
+     rdfs:label "Вода"@ru ;
+     skos:note "Молекула воды как диполь; Δχ = 1,4 → атомная связь." .
+
+
+###  http://example.org/chemistry#H2SO4
+:H2SO4 rdf:type owl:NamedIndividual ,
+                :Acid ;
+       :hasConstituentElement :H ,
+                              :O ,
+                              :S ;
+       rdfs:label "Серная кислота"@ru .
+
+
+###  http://example.org/chemistry#HCOOH
+:HCOOH rdf:type owl:NamedIndividual ,
+                :OrganicCompound ;
+       :hasConstituentElement :C ,
+                              :H ,
+                              :O ;
+       rdfs:label "Метановая кислота (муравьиная кислота)"@ru ;
+       skos:note "Карбоновая кислота — органическое соединение; не относится к классу :Acid (неорганические кислоты)." .
+
+
+###  http://example.org/chemistry#HCl
+:HCl rdf:type owl:NamedIndividual ,
+              :Acid ;
+     :hasBond :PartiallyIonicBond ;
+     :hasConstituentElement :Cl ,
+                            :H ;
+     rdfs:label "Хлористый водород"@ru ;
+     skos:note "Δχ = 0,9 → атомная связь, молекула." .
+
+
+###  http://example.org/chemistry#He
+:He rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Nonmetal ;
+    :belongsToMainSubgroup :GroupVIII ;
+    :belongsToPeriod :Period1 ;
+    :atomicNumber 2 ;
+    rdfs:label "Гелий"@ru .
+
+
+###  http://example.org/chemistry#Hg
+:Hg rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupII ;
+    :belongsToPeriod :Period6 ;
+    :atomicNumber 80 ;
+    rdfs:label "Ртуть"@ru .
+
+
+###  http://example.org/chemistry#I
+:I rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupVII ;
+   :belongsToPeriod :Period5 ;
+   :atomicNumber 53 ;
+   rdfs:label "Иод"@ru .
+
+
+###  http://example.org/chemistry#IonicBond
+:IonicBond rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/chemistry#IonicLattice
+:IonicLattice rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/chemistry#K
+:K rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Metal ;
+   :belongsToMainSubgroup :GroupI ;
+   :belongsToPeriod :Period4 ;
+   :atomicNumber 19 ;
+   :meltingPoint 63.5 ;
+   rdfs:label "Калий"@ru .
+
+
+###  http://example.org/chemistry#Li
+:Li rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupI ;
+    :belongsToPeriod :Period2 ;
+    :atomicNumber 3 ;
+    rdfs:label "Литий"@ru .
+
+
+###  http://example.org/chemistry#Mg
+:Mg rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupII ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 12 ;
+    rdfs:label "Магний"@ru .
+
+
+###  http://example.org/chemistry#Mn
+:Mn rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupVII ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 25 ;
+    rdfs:label "Марганец"@ru .
+
+
+###  http://example.org/chemistry#N
+:N rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupV ;
+   :belongsToPeriod :Period2 ;
+   :atomicNumber 7 ;
+   :electronegativity 3.0 ;
+   :relativeAtomicMass 14.007 ;
+   rdfs:label "Азот"@ru .
+
+
+###  http://example.org/chemistry#N2
+:N2 rdf:type owl:NamedIndividual ,
+             :Substance ;
+    rdfs:label "Азот (простое вещество)"@ru .
+
+
+###  http://example.org/chemistry#NH4
+:NH4 rdf:type owl:NamedIndividual ,
+              :Cation ,
+              :CompositeIon ;
+     rdfs:label "Ион аммония"@ru ;
+     skos:note "NH₃ + H⁺ → NH₄⁺ (координационный механизм)." .
+
+
+###  http://example.org/chemistry#NH4Cl
+:NH4Cl rdf:type owl:NamedIndividual ,
+                :Salt ;
+       :hasConstituentElement :Cl ,
+                              :H ,
+                              :N ;
+       rdfs:label "Хлорид аммония"@ru .
+
+
+###  http://example.org/chemistry#Na
+:Na rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupI ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 11 ;
+    :electronegativity 0.9 ;
+    :valence 1 ;
+    rdfs:label "Натрий"@ru .
+
+
+###  http://example.org/chemistry#NaCl
+:NaCl rdf:type owl:NamedIndividual ,
+               :Salt ;
+      :hasBond :IonicBond ;
+      :hasConstituentElement :Cl ,
+                             :Na ;
+      :hasLattice :IonicLattice ;
+      rdfs:label "Хлорид натрия"@ru ;
+      skos:note "Δχ = 2,1 → ионная связь, ионный кристалл." .
+
+
+###  http://example.org/chemistry#NaNO3
+:NaNO3 rdf:type owl:NamedIndividual ,
+                :Salt ;
+       :hasConstituentElement :N ,
+                              :Na ,
+                              :O ;
+       rdfs:label "Нитрат натрия"@ru .
+
+
+###  http://example.org/chemistry#NaOH
+:NaOH rdf:type owl:NamedIndividual ,
+               :Base ;
+      :hasConstituentElement :H ,
+                             :Na ,
+                             :O ;
+      rdfs:label "Гидроксид натрия"@ru .
+
+
+###  http://example.org/chemistry#Ne
+:Ne rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Nonmetal ;
+    :belongsToMainSubgroup :GroupVIII ;
+    :belongsToPeriod :Period2 ;
+    :atomicNumber 10 ;
+    rdfs:label "Неон"@ru .
+
+
+###  http://example.org/chemistry#O
+:O rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupVI ;
+   :belongsToPeriod :Period2 ;
+   :atomicNumber 8 ;
+   :electronegativity 3.5 ;
+   :valence 2 ;
+   rdfs:label "Кислород"@ru .
+
+
+###  http://example.org/chemistry#O2
+:O2 rdf:type owl:NamedIndividual ,
+             :Substance ;
+    rdfs:label "Кислород (простое вещество)"@ru .
+
+
+###  http://example.org/chemistry#P
+:P rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupV ;
+   :belongsToPeriod :Period3 ;
+   :atomicNumber 15 ;
+   rdfs:label "Фосфор"@ru .
+
+
+###  http://example.org/chemistry#PartiallyIonicBond
+:PartiallyIonicBond rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/chemistry#Pb
+:Pb rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupIV ;
+    :belongsToPeriod :Period6 ;
+    :atomicNumber 82 ;
+    rdfs:label "Свинец"@ru .
+
+
+###  http://example.org/chemistry#Period1
+:Period1 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period2
+:Period2 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period3
+:Period3 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period4
+:Period4 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period5
+:Period5 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period6
+:Period6 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#Period7
+:Period7 rdf:type owl:NamedIndividual ,
+                  :Period .
+
+
+###  http://example.org/chemistry#S
+:S rdf:type owl:NamedIndividual ,
+            :ChemicalElement ,
+            :Nonmetal ;
+   :belongsToMainSubgroup :GroupVI ;
+   :belongsToPeriod :Period3 ;
+   :atomicNumber 16 ;
+   rdfs:label "Сера"@ru ;
+   skos:note "Порядковый номер 16 = заряд ядра = число протонов = число электронов; VI = число внешних e⁻ (6); период 3 = число оболочек (3)." .
+
+
+###  http://example.org/chemistry#S8
+:S8 rdf:type owl:NamedIndividual ,
+             :Substance ;
+    rdfs:label "Сера S₈"@ru ;
+    skos:note "Циклическая форма молекулы серы." .
+
+
+###  http://example.org/chemistry#SO4_2
+:SO4_2 rdf:type owl:NamedIndividual ,
+                :Anion ,
+                :CompositeIon ;
+       rdfs:label "Сульфат-ион"@ru .
+
+
+###  http://example.org/chemistry#Se
+:Se rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metalloid ;
+    :belongsToMainSubgroup :GroupVI ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 34 ;
+    rdfs:label "Селен"@ru .
+
+
+###  http://example.org/chemistry#Si
+:Si rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metalloid ;
+    :belongsToMainSubgroup :GroupIV ;
+    :belongsToPeriod :Period3 ;
+    :atomicNumber 14 ;
+    rdfs:label "Кремний"@ru .
+
+
+###  http://example.org/chemistry#Sn
+:Sn rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToMainSubgroup :GroupIV ;
+    :belongsToPeriod :Period5 ;
+    :atomicNumber 50 ;
+    rdfs:label "Олово"@ru .
+
+
+###  http://example.org/chemistry#Zn
+:Zn rdf:type owl:NamedIndividual ,
+             :ChemicalElement ,
+             :Metal ;
+    :belongsToSideSubgroup :SideGroupII ;
+    :belongsToPeriod :Period4 ;
+    :atomicNumber 30 ;
+    :meltingPoint 232 ;
+    rdfs:label "Цинк"@ru .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:IonicBond rdfs:label "Ионная связь"@ru ;
+           skos:definition "Химическая связь, образованная в результате электрического притяжения двух разноимённо заряженных ионов."@ru ;
+           skos:note "Стр. 54." .
+
+
+:IonicLattice rdfs:label "Ионная решётка"@ru .
+
+
+:PartiallyIonicBond rdfs:label "Атомная связь с частично ионным характером"@ru ;
+                    skos:definition "Переходная форма между атомной и ионной связью; образуется в результате различной силы притяжения связующих электронов ядрами связанных атомов."@ru ;
+                    skos:note "Стр. 54." .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :GroupI
+                        :GroupII
+                        :GroupIII
+                        :GroupIV
+                        :GroupV
+                        :GroupVI
+                        :GroupVII
+                        :GroupVIII
+                        :SideGroupI
+                        :SideGroupII
+                        :SideGroupVI
+                        :SideGroupVII
+                        :SideGroupVIII
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Period1
+                        :Period2
+                        :Period3
+                        :Period4
+                        :Period5
+                        :Period6
+                        :Period7
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

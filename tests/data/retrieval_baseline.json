@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-24",
+  "question_set": {
+    "path": "tests/data/rag_control_questions.json",
+    "sha256": "2cdfd0c5c2b4e39c0e2fc8fea72d611a9e903eb1da8bf390ed4c2e534559b7f1",
+    "count": 50,
+    "scored": 43,
+    "formula_questions": 12,
+    "types": {
+      "ambiguous": 3,
+      "direct": 12,
+      "formula": 8,
+      "injection": 2,
+      "multi_fragment": 4,
+      "no_answer": 5,
+      "ontology": 4,
+      "paraphrase": 6,
+      "stoichiometry": 3,
+      "typo": 3
+    }
+  },
+  "source": {
+    "path": "учебники/5eb6e10c5b_himija_8_klass_o_s_gabrieljan_2025_g.pdf",
+    "sha256": "a5effecae3369ee5d78f7ad1337de44698e7fbb3be6f28183547a3d29392eff9",
+    "document_id": "gabrielyan-chemistry-grade-8-2025"
+  },
+  "index": {
+    "collection": "chemistry_grade8",
+    "points": 447,
+    "embedding_model": "intfloat/multilingual-e5-base",
+    "embedding_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+    "embedding_dimension": 768,
+    "distance": "Cosine",
+    "rrf_k": 60,
+    "candidate_limit": 30
+  },
+  "metrics": {
+    "overall": {
+      "dense": {
+        "questions": 43,
+        "hit_rate_at_5": 0.6976744186046512,
+        "mrr_at_10": 0.45739202657807315
+      },
+      "bm25": {
+        "questions": 43,
+        "hit_rate_at_5": 0.37209302325581395,
+        "mrr_at_10": 0.32276670358065707
+      },
+      "hybrid": {
+        "questions": 43,
+        "hit_rate_at_5": 0.6046511627906976,
+        "mrr_at_10": 0.4354558877814691
+      },
+      "hybrid_weighted": {
+        "questions": 43,
+        "hit_rate_at_5": 0.6976744186046512,
+        "mrr_at_10": 0.46918604651162776
+      }
+    },
+    "per_type": {
+      "dense": {
+        "ambiguous": {
+          "count": 3,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.8333333333333334
+        },
+        "direct": {
+          "count": 12,
+          "hit_rate_at_5": 0.75,
+          "mrr_at_10": 0.5410714285714285
+        },
+        "formula": {
+          "count": 8,
+          "hit_rate_at_5": 0.5,
+          "mrr_at_10": 0.15
+        },
+        "multi_fragment": {
+          "count": 4,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.75
+        },
+        "ontology": {
+          "count": 4,
+          "hit_rate_at_5": 0.5,
+          "mrr_at_10": 0.19999999999999998
+        },
+        "paraphrase": {
+          "count": 6,
+          "hit_rate_at_5": 0.6666666666666666,
+          "mrr_at_10": 0.5541666666666667
+        },
+        "stoichiometry": {
+          "count": 3,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.6666666666666666
+        },
+        "typo": {
+          "count": 3,
+          "hit_rate_at_5": 0.3333333333333333,
+          "mrr_at_10": 0.11666666666666665
+        }
+      },
+      "bm25": {
+        "ambiguous": {
+          "count": 3,
+          "hit_rate_at_5": 0.0,
+          "mrr_at_10": 0.041666666666666664
+        },
+        "direct": {
+          "count": 12,
+          "hit_rate_at_5": 0.4166666666666667,
+          "mrr_at_10": 0.310515873015873
+        },
+        "formula": {
+          "count": 8,
+          "hit_rate_at_5": 0.0,
+          "mrr_at_10": 0.020833333333333332
+        },
+        "multi_fragment": {
+          "count": 4,
+          "hit_rate_at_5": 0.75,
+          "mrr_at_10": 0.7777777777777778
+        },
+        "ontology": {
+          "count": 4,
+          "hit_rate_at_5": 0.25,
+          "mrr_at_10": 0.25
+        },
+        "paraphrase": {
+          "count": 6,
+          "hit_rate_at_5": 0.8333333333333334,
+          "mrr_at_10": 0.7083333333333334
+        },
+        "stoichiometry": {
+          "count": 3,
+          "hit_rate_at_5": 0.6666666666666666,
+          "mrr_at_10": 0.5
+        },
+        "typo": {
+          "count": 3,
+          "hit_rate_at_5": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "hybrid": {
+        "ambiguous": {
+          "count": 3,
+          "hit_rate_at_5": 0.6666666666666666,
+          "mrr_at_10": 0.27777777777777773
+        },
+        "direct": {
+          "count": 12,
+          "hit_rate_at_5": 0.75,
+          "mrr_at_10": 0.5277777777777778
+        },
+        "formula": {
+          "count": 8,
+          "hit_rate_at_5": 0.125,
+          "mrr_at_10": 0.1121031746031746
+        },
+        "multi_fragment": {
+          "count": 4,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.8
+        },
+        "ontology": {
+          "count": 4,
+          "hit_rate_at_5": 0.5,
+          "mrr_at_10": 0.4
+        },
+        "paraphrase": {
+          "count": 6,
+          "hit_rate_at_5": 0.8333333333333334,
+          "mrr_at_10": 0.5833333333333334
+        },
+        "stoichiometry": {
+          "count": 3,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.75
+        },
+        "typo": {
+          "count": 3,
+          "hit_rate_at_5": 0.0,
+          "mrr_at_10": 0.037037037037037035
+        }
+      },
+      "hybrid_weighted": {
+        "ambiguous": {
+          "count": 3,
+          "hit_rate_at_5": 0.6666666666666666,
+          "mrr_at_10": 0.7037037037037037
+        },
+        "direct": {
+          "count": 12,
+          "hit_rate_at_5": 0.75,
+          "mrr_at_10": 0.5393518518518517
+        },
+        "formula": {
+          "count": 8,
+          "hit_rate_at_5": 0.375,
+          "mrr_at_10": 0.134375
+        },
+        "multi_fragment": {
+          "count": 4,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.7083333333333333
+        },
+        "ontology": {
+          "count": 4,
+          "hit_rate_at_5": 0.75,
+          "mrr_at_10": 0.425
+        },
+        "paraphrase": {
+          "count": 6,
+          "hit_rate_at_5": 0.8333333333333334,
+          "mrr_at_10": 0.5750000000000001
+        },
+        "stoichiometry": {
+          "count": 3,
+          "hit_rate_at_5": 1.0,
+          "mrr_at_10": 0.7777777777777778
+        },
+        "typo": {
+          "count": 3,
+          "hit_rate_at_5": 0.3333333333333333,
+          "mrr_at_10": 0.06666666666666667
+        }
+      }
+    },
+    "formula": {
+      "dense": {
+        "questions": 12,
+        "formula_hit_at_5": 0.5,
+        "formula_top1": 0.08333333333333333
+      },
+      "bm25": {
+        "questions": 12,
+        "formula_hit_at_5": 0.16666666666666666,
+        "formula_top1": 0.08333333333333333
+      },
+      "hybrid": {
+        "questions": 12,
+        "formula_hit_at_5": 0.25,
+        "formula_top1": 0.16666666666666666
+      },
+      "hybrid_weighted": {
+        "questions": 12,
+        "formula_hit_at_5": 0.3333333333333333,
+        "formula_top1": 0.16666666666666666
+      }
+    }
+  },
+  "expected_chunks": {
+    "d01": [
+      "d2a35b187b597ede37d62481799d661aa7ded7479abdb93d9b590b02924e08c8"
+    ],
+    "d02": [
+      "553528380a6b272fe06c1349fac05b6be31f4357ad88811239259c136e1ba639"
+    ],
+    "d03": [
+      "4430561f31a419964ffb5d0f9cdbdcdbbb73642053ad0f2c6df1ccef4d51e059"
+    ],
+    "d04": [
+      "ad695ae58bcbf93b938926ffa79d31a80139157a870f8ca44fd166071524d58f"
+    ],
+    "d05": [
+      "8b9b7ebbd4073d9dc7f1effd2fd47e52b61028c9449495f808370fe3b465d720"
+    ],
+    "d06": [
+      "aaaf37517b228ff237a204c1bb57cee748521371c64f4e4c72aa132e72888f46"
+    ],
+    "d07": [
+      "2795b539a5cb963dc6a7517580fa125d2dd1ad32a651ede7b972418c0dd44749"
+    ],
+    "d08": [
+      "ce36944338306bfeba0ae1b4fa0e4e9c643e7df46372d58621e645f2b2cc09e8"
+    ],
+    "d09": [
+      "5b524bfbcf6ede55e9261971da658df5aacd2bde3569ca86b238274a1369c1fc"
+    ],
+    "d10": [
+      "7e13b852cd995338881689fd20b49a86bd97afb5f1f6bd23739a6269f2e28cd4"
+    ],
+    "d11": [
+      "fb0900cdae592cf70e03c0d4800a24cf3cea3fe21066adfa12aa0901678f8434"
+    ],
+    "d12": [
+      "bcf243245d2b590994c077e420a099e7f6676675cf72e4a7a6992bcee36ce190"
+    ],
+    "p13": [
+      "553528380a6b272fe06c1349fac05b6be31f4357ad88811239259c136e1ba639"
+    ],
+    "p14": [
+      "aaaf37517b228ff237a204c1bb57cee748521371c64f4e4c72aa132e72888f46"
+    ],
+    "p15": [
+      "8b9b7ebbd4073d9dc7f1effd2fd47e52b61028c9449495f808370fe3b465d720"
+    ],
+    "p16": [
+      "bcf243245d2b590994c077e420a099e7f6676675cf72e4a7a6992bcee36ce190"
+    ],
+    "p17": [
+      "a7d95c03b8bcb66195ac9b73fcd018734f58315e5bc1c15f0015575e205c299d"
+    ],
+    "p18": [
+      "6d404565cd5f4346f4c00b3dad40f2203ef977f3cc2a7aeb9f933316d9653a86"
+    ],
+    "f19": [
+      "fb0900cdae592cf70e03c0d4800a24cf3cea3fe21066adfa12aa0901678f8434"
+    ],
+    "f20": [
+      "fb0900cdae592cf70e03c0d4800a24cf3cea3fe21066adfa12aa0901678f8434"
+    ],
+    "f21": [
+      "6aefcbc0ad94c48cc1b84557bf48a32fe231e6f2bfec82fb3e48a958530a479f"
+    ],
+    "f22": [
+      "72c469775d20199bfa6ee1b111e13e555e67314f68c36fa21bd39d81d63b769e",
+      "f612c4363e027a84a8eefc946a5569de06ee41a02c36c80a8c402ade63cb313f"
+    ],
+    "f23": [
+      "bcf243245d2b590994c077e420a099e7f6676675cf72e4a7a6992bcee36ce190"
+    ],
+    "f24": [
+      "6d404565cd5f4346f4c00b3dad40f2203ef977f3cc2a7aeb9f933316d9653a86",
+      "cb6829f7927684a417f11799a881d769794d7e2b1d30575d0903c8b2ae151734"
+    ],
+    "f25": [
+      "5b524bfbcf6ede55e9261971da658df5aacd2bde3569ca86b238274a1369c1fc"
+    ],
+    "f26": [
+      "7e13b852cd995338881689fd20b49a86bd97afb5f1f6bd23739a6269f2e28cd4"
+    ],
+    "s27": [
+      "cee4cf37eed3b3b6928288f6e1f427e4d6d00e9e5f5e3e7452301394bfe00ade"
+    ],
+    "s28": [
+      "6d404565cd5f4346f4c00b3dad40f2203ef977f3cc2a7aeb9f933316d9653a86"
+    ],
+    "s29": [
+      "8007ccdb282d35714c4a20eb210f9e77d08019f6efeca6539fe8bf05aaecf047"
+    ],
+    "o30": [
+      "4430561f31a419964ffb5d0f9cdbdcdbbb73642053ad0f2c6df1ccef4d51e059"
+    ],
+    "o31": [
+      "8b9b7ebbd4073d9dc7f1effd2fd47e52b61028c9449495f808370fe3b465d720"
+    ],
+    "o32": [
+      "fb0900cdae592cf70e03c0d4800a24cf3cea3fe21066adfa12aa0901678f8434"
+    ],
+    "o33": [
+      "4c6388314c215c641ddf4ad6aae6c4c6b1e4bd90c83b862fef90cd060e5bc141"
+    ],
+    "m34": [
+      "9b77f9719533b904c3d6a4b4288ca45c29538750575e00aecaa373dbef9e07c6",
+      "a03b797e27bd9201ef4c97c23af7607159ee1b32ff23a61a57440e50d0c82d22",
+      "f1ed22ff72e2afe4519252dabfe76d6b21093a584e3d237643624947ef465c9a"
+    ],
+    "m35": [
+      "24f02ebc301b6b01f48fff3a55ba5e81d08fa0cd729f849a726a16d91850ee50",
+      "9b77f9719533b904c3d6a4b4288ca45c29538750575e00aecaa373dbef9e07c6",
+      "a03b797e27bd9201ef4c97c23af7607159ee1b32ff23a61a57440e50d0c82d22"
+    ],
+    "m36": [
+      "9799b9a360626f3b8d1ecd1bda683d3ad0a774e8c7cd07d2325f08f3072259fe"
+    ],
+    "m37": [
+      "32c1ec250deea79b3e009391f37a6415d5f60e331aea649670720d4fa8feabe8",
+      "7a2b17242bbba8a254a1f621e778ee1df30aa9c2b2245b10a1837efea0d58955",
+      "b70cead953dc917b19efe067deb8428a9c3e53430902592c5d4c32106928df09"
+    ],
+    "n38": [],
+    "n39": [],
+    "n40": [],
+    "n41": [],
+    "n42": [],
+    "a43": [
+      "2c37c7cc628eefc4584a56b291c90e5e9a2c84facff0d1e2870dc5721ee52e94",
+      "bcf243245d2b590994c077e420a099e7f6676675cf72e4a7a6992bcee36ce190"
+    ],
+    "a44": [
+      "0f40755a43afe9824996693e48291a5f790baefa03f88dceeb802cf8a9201f62",
+      "5b524bfbcf6ede55e9261971da658df5aacd2bde3569ca86b238274a1369c1fc",
+      "7eb84d8487e1c61bfcf229449e4afddf25bedcd5bc2b9507df588b014fa52a2d",
+      "c5fa0b3620d281a43da9f6ca66f8e24323d81d6b04af7029f27015a745a52e4d"
+    ],
+    "a45": [
+      "9b77f9719533b904c3d6a4b4288ca45c29538750575e00aecaa373dbef9e07c6",
+      "f1ed22ff72e2afe4519252dabfe76d6b21093a584e3d237643624947ef465c9a"
+    ],
+    "t46": [
+      "8b9b7ebbd4073d9dc7f1effd2fd47e52b61028c9449495f808370fe3b465d720"
+    ],
+    "t47": [
+      "fb0900cdae592cf70e03c0d4800a24cf3cea3fe21066adfa12aa0901678f8434"
+    ],
+    "t48": [
+      "4430561f31a419964ffb5d0f9cdbdcdbbb73642053ad0f2c6df1ccef4d51e059"
+    ],
+    "i49": [
+      "4430561f31a419964ffb5d0f9cdbdcdbbb73642053ad0f2c6df1ccef4d51e059"
+    ],
+    "i50": [
+      "2795b539a5cb963dc6a7517580fa125d2dd1ad32a651ede7b972418c0dd44749"
+    ]
+  },
+  "environment": {
+    "python": "3.12.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "elapsed_seconds": 13.4
+  }
+}
